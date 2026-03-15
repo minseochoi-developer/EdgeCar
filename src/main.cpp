@@ -1,3 +1,4 @@
+#include <Arduino.h>
 #include "drivers/UltrasonicDriver.h"
 #include "drivers/LineTrackingDriver.h"
 #include "drivers/IRDriver.h"
@@ -5,7 +6,6 @@
 #include "logic/LineTracking.h"
 #include "logic/ObstacleDetection.h"
 #include "logic/ModeManager.h"
-#include <Arduino.h>
 
 UltrasonicDriver ultrasonicDriver;
 LineTrackingDriver lineTrackingDriver;
