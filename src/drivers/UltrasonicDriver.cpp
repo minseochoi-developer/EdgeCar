@@ -19,7 +19,7 @@ float UltrasonicDriver::getDistance() {
     digitalWrite(PIN_ULTRASONIC_TRIG, LOW);
 
     long duration = pulseIn(PIN_ULTRASONIC_ECHO, HIGH, 30000);
-    
+        
     if (duration == 0)
         return -1.0f;
 
