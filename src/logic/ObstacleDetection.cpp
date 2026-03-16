@@ -1,6 +1,6 @@
+#include <Arduino.h>
 #include "ObstacleDetection.h"
 #include "../common/config.h"
-#include <Arduino.h>
 
 void ObstacleDetection::begin(UltrasonicDriver* ultrasonicDriver, MotorControl* motorControl) {
     _ultrasonicDriver = ultrasonicDriver;

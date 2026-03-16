@@ -1,6 +1,6 @@
+#include <Arduino.h>
 #include "LineTrackingDriver.h"
 #include "../common/pins.h"
-#include <Arduino.h>
 
 // 적외선을 발사해 반사되는 양 측정
 // 검은색 선 HIGH, 흰색 선 LOW

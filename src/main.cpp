@@ -10,27 +10,31 @@
 UltrasonicDriver ultrasonicDriver;
 LineTrackingDriver lineTrackingDriver;
 IRDriver irDriver;
-MotorControl motorControl;
+MotorControl *motorControl = new MotorControl();
 LineTracking lineLogic;
 ObstacleDetection obstacleLogic;
 ModeManager modeManager;
 
 void setup() {
     Serial.begin(9600);
+    delay(3000);
+    motorControl->begin();
     ultrasonicDriver.begin();
     lineTrackingDriver.begin();
     irDriver.begin();
-    motorControl.begin();
-    lineLogic.begin(&lineTrackingDriver, &motorControl);
-    obstacleLogic.begin(&ultrasonicDriver, &motorControl);
+    
+    lineLogic.begin(&lineTrackingDriver, motorControl);
+    obstacleLogic.begin(&ultrasonicDriver, motorControl);
+    modeManager.begin();
 }
 
 void loop() {
     if (irDriver.available()) {
         unsigned long code = irDriver.read();
-        if (code == 0x00FF38C7 || code == 0x488F3CBB)
+        // MANUAL 모드 : 5, LINE_TRACKING 모드 : 2
+        if (code ==  3810328320)
             modeManager.setMode(Mode::MANUAL);
-        else if (code == 0x00FF18E7 || code == 0x48B73CB9)
+        else if (code == 3877175040)
             modeManager.setMode(Mode::LINE_TRACKING);
     }
 
@@ -40,5 +44,9 @@ void loop() {
         } else {
             lineLogic.update();
         }
+    } else if (modeManager.getMode() == Mode::MANUAL) {
+        motorControl->stop();
     }
+    
+    delay(500);
 }

@@ -1,5 +1,5 @@
-#include "ModeManager.h"
 #include <Arduino.h>
+#include "ModeManager.h"
 
 void ModeManager::begin() {
     _currentMode = Mode::LINE_TRACKING;
